@@ -1,7 +1,5 @@
-import "./globals.css";
 import type { Metadata } from "next";
 import { Lato } from "next/font/google";
-import { ChakraProvider } from "@chakra-ui/react";
 import { ReactNode } from "react";
 import Providers from "./providers";
 
@@ -16,7 +14,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Providers pageProps={undefined}>{children}</Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

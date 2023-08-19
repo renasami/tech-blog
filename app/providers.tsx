@@ -2,7 +2,6 @@
 import { Button, ChakraProvider, extendBaseTheme } from "@chakra-ui/react";
 import { CacheProvider } from "@chakra-ui/next-js";
 
-import type { AppProps } from "next/app";
 import { ReactNode } from "react";
 
 const theme = extendBaseTheme({
