@@ -1,4 +1,5 @@
 "use client";
+import { useLogin } from "@/src/hooks/useLogin";
 import {
   Text,
   Container,
@@ -9,29 +10,45 @@ import {
   Input,
   useColorModeValue,
 } from "@chakra-ui/react";
+import { useForm } from "react-hook-form";
+
+type FormValues = { email: string; password: string };
 
 const Login = () => {
-  const bgColor = useColorModeValue("gray.100", "100");
-  const textColor = useColorModeValue("white", "black");
-
+  const {
+    handleSubmit,
+    register,
+    formState: { errors, isSubmitting },
+  } = useForm<FormValues>();
+  const { login } = useLogin();
+  if (isSubmitting) return <Text>Submitting...</Text>;
   return (
-    <Flex
-      height="100vh"
-      alignItems="center"
-      justifyContent="center"
-      background={bgColor}
-      textColor={textColor}
-    >
-      <Flex direction="column" background="gray.100" padding={12} rounded={6}>
-        <Heading mb={6}>Log in</Heading>
-        <Input placeholder="sample@sample.com" mb={3} type="email" />
-        <Input placeholder="********" variant="filled" mb={6} type="password" />
-        <Button mb={6} colorScheme="teal">
-          Log in
-        </Button>
-        <Button>Toggle Color Mode</Button>
+    <form onSubmit={handleSubmit(login)}>
+      <Flex height="100vh" alignItems="center" justifyContent="center">
+        <Flex direction="column" padding={12} rounded={6}>
+          <Heading mb={6}>Log in</Heading>
+          <Input
+            placeholder="sample@sample.com"
+            mb={3}
+            type="email"
+            required
+            {...register("email")}
+          />
+          <Input
+            placeholder="********"
+            variant="filled"
+            mb={6}
+            type="password"
+            required
+            {...register("password")}
+          />
+          <Button mb={6} border={"bold"} colorScheme="teal" type="submit">
+            Log in
+          </Button>
+          <Button>Toggle Color Mode</Button>
+        </Flex>
       </Flex>
-    </Flex>
+    </form>
   );
 };
 
