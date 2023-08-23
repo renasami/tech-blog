@@ -1,31 +1,17 @@
-import { fetchJSON } from "../util/api";
+import { useMutation, useQuery } from "react-query";
+import { LoginResponse, login } from "../api/auth";
 
-export const useLogin = () => {
-  const login = async ({ email, password }: LoginParams) => {
-    const path = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.NEXT_PUBLIC_FIREBAE_KEY}`;
-    const body = {
-      email: email,
-      password: password,
-      returnSecureToken: true,
-    };
-    const options = {
-      method: "POST",
-      body: JSON.stringify(body),
-    };
-    return await fetch(path, options);
-  };
-  return { login };
+export const useLogin = (email: string, password: string) => {
+  const mutateFn = async (args: Args) => await login(args.email, args.password);
+  const { data, isLoading, isError, mutateAsync } = useMutation<
+    LoginResponse,
+    Error,
+    Args
+  >(mutateFn);
+  return { data, isLoading, isError, mutateAsync };
 };
 
-type LoginResponse = {
-  idToken: string;
-  email: string;
-  refreshToken: string;
-  expiresIn: string;
-  localId: string;
-};
-
-type LoginParams = {
+type Args = {
   email: string;
   password: string;
 };

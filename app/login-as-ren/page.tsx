@@ -21,11 +21,18 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm<FormValues>();
   const { login } = useLogin();
+  const formBackGround = useColorModeValue("gray.100", "gray.700");
+
   if (isSubmitting) return <Text>Submitting...</Text>;
   return (
     <form onSubmit={handleSubmit(login)}>
       <Flex height="100vh" alignItems="center" justifyContent="center">
-        <Flex direction="column" padding={12} rounded={6}>
+        <Flex
+          direction="column"
+          background={formBackGround}
+          padding={12}
+          rounded={6}
+        >
           <Heading mb={6}>Log in</Heading>
           <Input
             placeholder="sample@sample.com"
@@ -35,14 +42,14 @@ const Login = () => {
             {...register("email")}
           />
           <Input
-            placeholder="********"
+            placeholder="password"
             variant="filled"
             mb={6}
             type="password"
             required
             {...register("password")}
           />
-          <Button mb={6} border={"bold"} colorScheme="teal" type="submit">
+          <Button mb={6} colorScheme="blue" type="submit">
             Log in
           </Button>
           <Button>Toggle Color Mode</Button>
