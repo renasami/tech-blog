@@ -1,4 +1,4 @@
-export const login = async (email: string, password: string) => {
+export const login = async ({ email, password }: LoginParams) => {
   const path = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${process.env.NEXT_PUBLIC_FIREBAE_KEY}`;
   const body = {
     email: email,

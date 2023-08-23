@@ -1,4 +1,5 @@
 "use client";
+import { login } from "@/src/api/auth";
 import { useLogin } from "@/src/hooks/useLogin";
 import {
   Text,
@@ -20,7 +21,6 @@ const Login = () => {
     register,
     formState: { errors, isSubmitting },
   } = useForm<FormValues>();
-  const { login } = useLogin();
   const formBackGround = useColorModeValue("gray.100", "gray.700");
 
   if (isSubmitting) return <Text>Submitting...</Text>;
