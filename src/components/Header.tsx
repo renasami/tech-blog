@@ -14,11 +14,17 @@ export const Header = () => {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
-    <Box px={4}>
-      <Container maxW="container.lg">
+    <Box px={16} padding={0}>
+      <Container
+        maxW="container.lg"
+        margin={0}
+        background={"blue"}
+        maxWidth={"100%"}
+        width={"100%"}
+      >
         <Flex
           as="header"
-          justifyContent="space-between"
+          justifyContent="space-evenly"
           alignItems="space-evenly"
         >
           <Link href="/">
